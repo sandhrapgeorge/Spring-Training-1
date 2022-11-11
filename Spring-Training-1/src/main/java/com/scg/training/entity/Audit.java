@@ -27,10 +27,4 @@ public class Audit {
 	@Column(name = "last_updated_timestamp")
 	private LocalDateTime lastUpdatedTimestamp;
 
-//	public Audit(final Employee employee) {
-//		this.employeeName = employee.getEmployeeName();
-//		this.designation = employee.getDesignation();
-//		this.version = employee.getVersion();
-//	}
-
 }

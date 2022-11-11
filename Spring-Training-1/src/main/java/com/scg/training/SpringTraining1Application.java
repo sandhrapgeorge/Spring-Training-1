@@ -6,18 +6,14 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.scg.training.entity.Address;
 import com.scg.training.entity.Audit;
-import com.scg.training.entity.Employee;
 import com.scg.training.entity.Gender;
 import com.scg.training.entity.Laptop;
 import com.scg.training.entity.School;
 import com.scg.training.entity.Student;
 import com.scg.training.entity.StudentDetails;
-import com.scg.training.repository.EmployeeRepository;
 import com.scg.training.repository.StudentDetailsRepository;
 import com.scg.training.repository.StudentRepository;
 
@@ -33,7 +29,7 @@ public class SpringTraining1Application {
 //		final Alien a1 = context.getBean(Alien.class);
 //		a1.show();
 		create(context);
-		createEmployee(context);
+		// createEmployee(context);
 
 	}
 
@@ -42,13 +38,19 @@ public class SpringTraining1Application {
 
 			final StudentRepository studentRepository = context.getBean(StudentRepository.class);
 			final StudentDetailsRepository studentDetailsRepository = context.getBean(StudentDetailsRepository.class);
-			final EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
+
 			final StudentDetails studDetails = new StudentDetails("dance");
 			studentDetailsRepository.save(studDetails);
 			System.out.println("hii");
 			final LocalDateTime now = LocalDateTime.now();
-			final Address address = new Address(13, "snehavedu", "kothamangalam");
-			final Student student1 = new Student("sini", studDetails, address);
+
+			final Audit audit = new Audit();
+			audit.setCreatedTimestamp(now);
+			audit.setLastUpdatedTimestamp(now);
+			audit.setCreatedBy("james");
+			audit.setLastUpdatedBy("jiji");
+			// final Address address = new Address(13, "snehavedu", "kothamangalam");
+			final Student student1 = new Student("sini", studDetails, audit);
 			final Gender gender = Gender.FEMALE;
 			student1.setGender(gender);
 			student1.setCreatedAt(now);
@@ -83,38 +85,4 @@ public class SpringTraining1Application {
 		}
 
 	}
-
-	public static void createEmployee(final ApplicationContext context) {
-		final EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
-		System.out.println("Hii..");
-		final LocalDateTime now = LocalDateTime.now();
-		final Audit audit = new Audit();
-		audit.setCreatedTimestamp(now);
-		audit.setLastUpdatedTimestamp(now);
-		// final Employee employee = new Employee();
-		audit.setCreatedBy("james");
-		audit.setLastUpdatedBy("jiji");
-
-		final Employee employee = new Employee("hancepaul", "HR", "1gl", audit);
-//		employee.setEmployeeName("hancepaul");
-//		employee.setDesignation("HR");
-//		employee.setVersion("1gl");
-//		final Audit audit = new Audit();
-//		audit.setCreatedTimestamp(now);
-//		audit.setLastUpdatedTimestamp(now);
-//
-//		audit.setCreatedBy("anu");
-//		audit.setLastUpdatedBy("Mani");
-//		employee.setAudit(audit);
-		System.out.println("inserting..");
-		try {
-
-			employeeRepository.save(employee);
-		} catch (final Exception e) {
-			System.out.println("Exception :" + e);
-		}
-
-		System.out.println("inserting..");
-	}
-
 }

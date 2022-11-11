@@ -1,22 +1,28 @@
 package com.scg.training.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.scg.training.entity.Laptop;
 import com.scg.training.entity.Student;
+import com.scg.training.exception.InvalidInputException;
 import com.scg.training.repository.StudentRepository;
+import com.scg.training.service.StudentService;
 
 //@Component
 //@Controller
 //@RequestMapping("test1")
 @RestController
 public class StudentController {
-//	@Autowired
-//	private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 	@Autowired
 	private StudentRepository studentRepo;
 
@@ -43,33 +49,35 @@ public class StudentController {
 //		throw new InvalidInputException("Id not found");
 //
 //	}
-//	@GetMapping("/student/{id}")
-//	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {
-//		final Student readbystudent = studentRepo.getById(id);
-//		System.err.println(readbystudent.getName());
-//		final List<Laptop> lap = readbystudent.getLaptop();
-//		for (final Laptop l : lap) {
-//			System.out.println(l.getLaptopName());
-//		}
-//		final Optional<String> user = Optional.ofNullable(studentService.readById(id));
-//		if (user.isPresent()) {
-//			return new ResponseEntity<>(user.get(), HttpStatus.OK);
-//		}
-//		throw new InvalidInputException("Id not found");
-//
-//	}
-	@GetMapping("/student/{studentname}")
-	public String getByName(@PathVariable final String studentname) {
 
-		final List<Student> studentlist = studentRepo.findStudentByName(studentname);
-		for (final Student s : studentlist) {
-			System.out.println("\nstudent id:" + s.getStudentid());
-			System.out.println("student name:" + s.getName());
-			System.out.println("Gender" + s.getGender());
+	@GetMapping("/student/{id}")
+	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {
+		final Student readbystudent = studentRepo.getById(id);
+		System.err.println(readbystudent.getName());
+		final List<Laptop> lap = readbystudent.getLaptop();
+		for (final Laptop l : lap) {
+			System.out.println(l.getLaptopName());
 		}
-		return "hii";
+		final Optional<String> user = Optional.ofNullable(studentService.readById(id));
+		if (user.isPresent()) {
+			return new ResponseEntity<>(user.get(), HttpStatus.OK);
+		}
+		throw new InvalidInputException("Id not found");
 
 	}
+
+//	@GetMapping("/student/{studentname}")
+//	public String getByName(@PathVariable final String studentname) {
+//
+//		final List<Student> studentlist = studentRepo.findStudentByName(studentname);
+//		for (final Student s : studentlist) {
+//			System.out.println("\nstudent id:" + s.getStudentid());
+//			System.out.println("student name:" + s.getName());
+//			System.out.println("Gender" + s.getGender());
+//		}
+//		return "hii";
+//
+//	}
 
 //	@PutMapping("/updatestudent/{id}")
 //	public String update(@RequestBody final StudentVO studentVO) throws Exception {

@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomAuditListener {
 
 	@PrePersist
-	public void setCreatedOn(final Employee emp) {
-		log.info("Attempting to add new student" + emp.getEmployeeName());
-		System.out.println("new user is adding to the datase" + emp.getEmployeeName());
-		final Audit audit = emp.getAudit();
+	public void setCreatedOn(final Student stud) {
+		log.info("Attempting to add new student" + stud.getName());
+		System.out.println("new user is adding to the datase" + stud.getName());
+		final Audit audit = stud.getAudit();
 
 		final LocalDateTime now = LocalDateTime.now();
 		audit.setCreatedTimestamp(now);
@@ -31,8 +31,8 @@ public class CustomAuditListener {
 	}
 
 	@PreUpdate
-	public void setUpdadtedOn(final Employee emp) {
-		final Audit audit = emp.getAudit();
+	public void setUpdadtedOn(final Student stud) {
+		final Audit audit = stud.getAudit();
 
 		audit.setLastUpdatedTimestamp(LocalDateTime.now());
 		audit.setLastUpdatedBy("abc");

@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -15,7 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
@@ -39,9 +41,10 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-//@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
+@EntityListeners(CustomAuditListener.class)
+@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
 //@NamedNativeQuery(name="carkey",query="select id as id,name as name,length as length,width as width,length*width as area from Car", resultSetMapping="carkey")
-@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
+//@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +82,7 @@ public class Student {
 	private School school;
 
 	@Embedded
-	private Address address;
+	private Audit audit;
 
 	public void setLaptop(final List<Laptop> l1) {
 		// TODO Auto-generated method stub
@@ -87,10 +90,10 @@ public class Student {
 
 	}
 
-	public Student(final String name, final StudentDetails studentDetails, final Address address) {
+	public Student(final String name, final StudentDetails studentDetails, final Audit audit) {
 		this.name = name;
 		this.studentDetails = studentDetails;
-		this.address = address;
+		this.audit = audit;
 		// int age = age;
 	}
 
