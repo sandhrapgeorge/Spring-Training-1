@@ -27,19 +27,13 @@ public class SpringTraining1Application {
 //	private static StudentController studentController;
 
 	public static void main(final String[] args) {
-		// System.out.println("Hello");
+
 		final ConfigurableApplicationContext context = SpringApplication.run(SpringTraining1Application.class, args);
-//		System.out.println("Hii");
-//		System.out.println(studentController.main2());
-
-//		final StudentVO student = context.getBean(StudentVO.class);
-//		System.out.println(student.getName());
-
+//
+//		final Alien a1 = context.getBean(Alien.class);
+//		a1.show();
 		create(context);
 		createEmployee(context);
-
-//		final Student s1 = studentRepository.getById(1);
-//		System.out.println(s1);
 
 	}
 

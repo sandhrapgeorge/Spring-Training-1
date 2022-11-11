@@ -32,11 +32,10 @@ public class CustomAuditListener {
 
 	@PreUpdate
 	public void setUpdadtedOn(final Employee emp) {
+		final Audit audit = emp.getAudit();
 
-//		final var audit = auditable.getAudit();
-//		audit.setLastUpdatedTimestamp(LocalDateTime.now());
-//
-//		audit.setLastUpdatedBy("chinchu");
+		audit.setLastUpdatedTimestamp(LocalDateTime.now());
+		audit.setLastUpdatedBy("abc");
 		System.out.println("data inserting on progress");
 	}
 
