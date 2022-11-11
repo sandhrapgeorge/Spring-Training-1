@@ -1,9 +1,12 @@
 package com.scg.training.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,9 +30,8 @@ public class Laptop {
 		this.laptopName = laptopName;
 	}
 
-	// @ManyToOne
-	// @JoinColumn(name = "studentid")
-//	@JoinColumn(name = "studentid", nullable = false)
-//	private Student student;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
+	private Student student;
 
 }

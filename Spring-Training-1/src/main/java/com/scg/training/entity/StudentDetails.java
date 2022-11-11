@@ -1,32 +1,32 @@
 package com.scg.training.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "student_details")
-@NoArgsConstructor
-//@AllArgsConstructor
 public class StudentDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer studentDetailsId;
 	private String hobby;
-	@OneToOne(mappedBy = "studentDetails")
-	private Student student;
+	private Double weight;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "studentid")
+	Student student;
 
-	public StudentDetails(final String hobby) {
+	public StudentDetails(final String hobby, final Double weight) {
 		this.hobby = hobby;
-
+		this.weight = weight;
 	}
 }

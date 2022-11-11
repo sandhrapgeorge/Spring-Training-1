@@ -8,12 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.scg.training.entity.Audit;
+import com.scg.training.entity.Contact;
 import com.scg.training.entity.Gender;
 import com.scg.training.entity.Laptop;
 import com.scg.training.entity.School;
 import com.scg.training.entity.Student;
 import com.scg.training.entity.StudentDetails;
+import com.scg.training.repository.SchoolRepository;
 import com.scg.training.repository.StudentDetailsRepository;
 import com.scg.training.repository.StudentRepository;
 
@@ -38,29 +39,38 @@ public class SpringTraining1Application {
 
 			final StudentRepository studentRepository = context.getBean(StudentRepository.class);
 			final StudentDetailsRepository studentDetailsRepository = context.getBean(StudentDetailsRepository.class);
-
-			final StudentDetails studDetails = new StudentDetails("dance");
-			studentDetailsRepository.save(studDetails);
+			final SchoolRepository schoolRepository = context.getBean(SchoolRepository.class);
+			@SuppressWarnings("boxing")
+			final StudentDetails studentDetails = new StudentDetails("dance", 15.5d);
+			// studentDetailsRepository.save(studDetails);
 			System.out.println("hii");
 			final LocalDateTime now = LocalDateTime.now();
-
-			final Audit audit = new Audit();
-			audit.setCreatedTimestamp(now);
-			audit.setLastUpdatedTimestamp(now);
-			audit.setCreatedBy("james");
-			audit.setLastUpdatedBy("jiji");
+			final Contact contact = new Contact();
+			contact.setContactPersonName("Hance");
+			contact.setEmailId("hancepb@gmail.com");
+			contact.setMobileNumber(Long.valueOf(7345678933L));
+			final School school1 = new School("MarBasil", "Kothamangalam");
+			school1.setContact(contact);
+			// schoolRepository.save(school1);
+			// final Audit audit = new Audit();
+//			audit.setCreatedTimestamp(now);
+//			audit.setLastUpdatedTimestamp(now);
+//			audit.setCreatedBy("james");
+//			audit.setLastUpdatedBy("jiji");
 			// final Address address = new Address(13, "snehavedu", "kothamangalam");
-			final Student student1 = new Student("sini", studDetails, audit);
+			final Student student1 = new Student();
+			student1.setStudentName("sini");
 			final Gender gender = Gender.FEMALE;
 			student1.setGender(gender);
-			student1.setCreatedAt(now);
-			student1.setUpdatedAt(now);
 			final Laptop laptop1 = new Laptop("DELL");
 			final Laptop laptop2 = new Laptop("Lenovo");
 			final List<Laptop> l1 = Arrays.asList(laptop1, laptop2);
 			student1.setLaptop(l1);
-			final School school1 = new School("MarBasil", "Kothamangalam");
 			student1.setSchool(school1);
+			studentDetails.setStudent(student1);
+			// studentDetails.setStudent(student1);
+//			final School school1 = new School("MarBasil", "Kothamangalam");
+//			student1.setSchool(school1);
 //		final StudentDetails studDetails2 = new StudentDetails("reading");
 //		studentDetailsRepository.save(studDetails2);
 //		final Student student2 = new Student("jini", studDetails2, address);
@@ -74,10 +84,10 @@ public class SpringTraining1Application {
 //		student2.setSchool(school1);
 			System.out.println("hello");
 
-			studentRepository.save(student1);
+			studentDetailsRepository.save(studentDetails);
 			System.out.println("good...");
 			// studentRepository
-//		studentRepository.save(student2);
+			// studentRepository.save(student1);
 
 		} catch (final Exception e) {
 			System.out.println("exception occured....");

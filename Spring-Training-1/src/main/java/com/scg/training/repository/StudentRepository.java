@@ -21,5 +21,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer>, JpaS
 
 	List<Student> findStudentByName(String name);
 
+	List<String> getSchoolByStudentById(int id);
+
 }
 //The @Query annotation takes precedence over named queries, which are annotated with @NamedQuery or defined in an orm.xml file.

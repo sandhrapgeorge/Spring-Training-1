@@ -1,11 +1,9 @@
 package com.scg.training.entity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -16,10 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -41,11 +37,11 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-@EntityListeners(CustomAuditListener.class)
-@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
+//@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
 //@NamedNativeQuery(name="carkey",query="select id as id,name as name,length as length,width as width,length*width as area from Car", resultSetMapping="carkey")
-//@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
-public class Student {
+@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
+@EntityListeners(CustomAuditListener.class)
+public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -55,18 +51,14 @@ public class Student {
 	// allocationSize = 2, sequenceName = "student_hibernate1")
 	private int studentid;
 	@Column(name = "studentname", length = 50, nullable = false, unique = true)
-	private String name;
+	private String studentName;
 	@Enumerated(EnumType.ORDINAL)
 	private Gender gender;
 
-	@Column(name = "created_at", updatable = false)
-	private LocalDateTime createdAt;
-	@Column(name = "updated_at", insertable = false)
-	private LocalDateTime updatedAt;
-
-	@OneToOne
-	@JoinColumn(name = "student_details_id")
-	StudentDetails studentDetails;
+//	@Column(name = "created_at", updatable = false)
+//	private LocalDateTime createdAt;
+//	@Column(name = "updated_at", insertable = false)
+//	private LocalDateTime updatedAt;
 
 	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
@@ -77,57 +69,57 @@ public class Student {
 //	REMOVE
 //	REFRESH
 //	DETACH
+
+//	@OneToOne
+//	StudentDetails studentDetails;
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "schoolid")
+	@JoinColumn(name = "schoolid", insertable = false, updatable = false)
 	private School school;
 
-	@Embedded
-	private Audit audit;
+//	public void setLaptop(final List<Laptop> l1) {
+//		// TODO Auto-generated method stub
+//		this.laptop = l1;
+//
+//	}
 
-	public void setLaptop(final List<Laptop> l1) {
-		// TODO Auto-generated method stub
-		this.laptop = l1;
-
-	}
-
-	public Student(final String name, final StudentDetails studentDetails, final Audit audit) {
-		this.name = name;
-		this.studentDetails = studentDetails;
-		this.audit = audit;
+	public Student(final String name) {
+		this.studentName = name;
+		// this.audit = audit;
 		// int age = age;
 	}
 
 	@PrePersist
 	public void logNewUserAttempt() {
-		log.info("Attempting to add new user with username: " + name);
+		log.info("Attempting to add new user with username: " + studentName);
 		System.out.println("new user is adding to the datase");
-		this.setName("hari");
+		// this.setStudentName("hari");
 	}
 
 	@PostPersist
 	public void logNewUserAdded() {
-		log.info("Added user '" + name + "' with ID: " + studentid);
+		log.info("Added user '" + studentName + "' with ID: " + studentid);
 		System.out.println("new user is added to the datase..");
 	}
 
 	@PreRemove
 	public void logUserRemovalAttempt() {
-		log.info("Attempting to delete user: " + name);
+		log.info("Attempting to delete user: " + studentName);
 	}
 
 	@PostRemove
 	public void logUserRemoval() {
-		log.info("Deleted user: " + name);
+		log.info("Deleted user: " + studentName);
 	}
 
 	@PreUpdate
 	public void logUserUpdateAttempt() {
-		log.info("Attempting to update user: " + name);
+		log.info("Attempting to update user: " + studentName);
 	}
 
 	@PostUpdate
 	public void logUserUpdate() {
-		log.info("Updated user: " + name);
+		log.info("Updated user: " + studentName);
 	}
 
 }

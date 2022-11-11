@@ -4,19 +4,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.scg.training.vo.StudentVO;
+import com.scg.training.vo.StudentDetailsVO;
 
 @Configuration
 public class StudentConfiguration {
 
 	@Bean
-	public StudentVO siniStudent() {
-		return new StudentVO("sini", 16);
+	public StudentDetailsVO siniStudent() {
+		return new StudentDetailsVO("read", Double.valueOf(15.5d));
 	}
 
 	@Bean
 	@Primary
-	public StudentVO jiniStudent() {
-		return new StudentVO("jini", 16);
+	public StudentDetailsVO jiniStudent() {
+		return new StudentDetailsVO("write", Double.valueOf(30.6d));
 	}
 }

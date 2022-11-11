@@ -3,6 +3,7 @@ package com.scg.training.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,8 +29,11 @@ public class School {
 	private int schoolid;
 	private String schoolName;
 	private String city;
+	@Embedded
+	Contact contact;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid")
+	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid", insertable = false, updatable = false)
 	private List<Student> student;
 
 	public School(final String schoolname, final String city) {

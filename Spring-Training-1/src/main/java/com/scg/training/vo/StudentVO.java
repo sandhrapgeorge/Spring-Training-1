@@ -1,8 +1,8 @@
 package com.scg.training.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.List;
+
+import com.scg.training.entity.StudentDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,14 +14,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentVO {
-	
-	public StudentVO(String name2, int age2) {
-		// TODO Auto-generated constructor stub
-		this.name=name2;
-		this.age=age2;
-	}
 	private int id;
 	private String name;
-	private int age;
+	private StudentDetails studentDetails;
+	List<LaptopVO> laptop;
+
+	public StudentVO(final String name, final StudentDetails studentDetails, final List<LaptopVO> laptop) {
+		this.name = name;
+		this.studentDetails = studentDetails;
+		this.laptop = laptop;
+	}
 
 }

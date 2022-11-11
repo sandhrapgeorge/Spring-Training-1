@@ -2,6 +2,7 @@ package com.scg.training.service.impl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,9 +42,9 @@ public class StudentServiceImpl implements StudentService {
 		}
 		// final int age = readInteger();
 
-		if ((studentVO.getAge() < 6) || (studentVO.getAge() > 50)) {
-			throw new InvalidInputException("Invalid student Age");
-		}
+//		if ((studentVO.getAge() < 6) || (studentVO.getAge() > 50)) {
+//			throw new InvalidInputException("Invalid student Age");
+//		}
 
 		final StudentVO savedStudent = studentDao.insert(studentVO);
 		System.out.println("Student record inserted successfuly\n");
@@ -55,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
 	public String readById(final int id) throws Exception {
 		final StudentVO savedStudent = studentDao.readById(id);
 		return ("Student details are :\n Student id :" + savedStudent.getId() + "\nStudent name: "
-				+ savedStudent.getName() + "\nStudent Age: " + savedStudent.getAge());
+				+ savedStudent.getName());
 
 	}
 
@@ -69,15 +70,57 @@ public class StudentServiceImpl implements StudentService {
 		}
 		// final int age = readInteger();
 
-		if ((studentVO.getAge() < 6) || (studentVO.getAge() > 50)) {
-			throw new InvalidInputException("Invalid student Age");
-		}
+//		if ((studentVO.getAge() < 6) || (studentVO.getAge() > 50)) {
+//			throw new InvalidInputException("Invalid student Age");
+//		}
 
 		final StudentVO savedStudent = studentDao.update(studentVO);
 		System.out.println("Student record updated successfuly\n");
 		return ("Student record updated successfuly\nStudentid : " + savedStudent.getId() + "\nstudent name :"
-				+ savedStudent.getName() + "\nstudent age: " + savedStudent.getAge());
+				+ savedStudent.getName());
 
+	}
+
+	@Override
+	public StudentVO updateStudentById(final StudentVO studentVO) {
+		// TODO Auto-generated method stub
+		return studentDao.updateStudentById(studentVO);
+	}
+
+	@Override
+	public String deleteStudent(final int id) {
+		// TODO Auto-generated method stub
+		return studentDao.deleteStudent(id);
+	}
+
+	@Override
+	public List<StudentVO> findByStudentName(final String name) {
+		// TODO Auto-generated method stub
+		return studentDao.findByStudentName(name);
+	}
+
+	@Override
+	public StudentVO getStudentById(final int id) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentById(id);
+	}
+
+	@Override
+	public List<StudentVO> getStudentsByPagination(final int pageNumber) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentsByPagination(pageNumber);
+	}
+
+	@Override
+	public List<StudentVO> getStudents() {
+		// TODO Auto-generated method stub
+		return studentDao.getStudents();
+	}
+
+	@Override
+	public StudentVO saveStudent(final StudentVO studentVO) {
+		// TODO Auto-generated method stub
+		return studentDao.saveStudent(studentVO);
 	}
 }
 //

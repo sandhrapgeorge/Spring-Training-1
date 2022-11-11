@@ -1,5 +1,7 @@
 package com.scg.training.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +19,7 @@ public class StudentDAOImpl implements StudentDAO {
 	// StudentController studentRepo=c.getBean(StudentRepository.class);
 	private Student covertVoToEntity(final StudentVO studentVO) {
 		final Student student = new Student();
-		student.setName(studentVO.getName());
+		student.setStudentName(studentVO.getName());
 		// student.setAge(studentVO.getAge());
 		return student;
 
@@ -26,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
 	private StudentVO covertEntityToVO(final Student student) {
 		final StudentVO studentVO = new StudentVO();
 		studentVO.setId(student.getStudentid());
-		studentVO.setName(student.getName());
+		studentVO.setName(student.getStudentName());
 		// studentVO.setAge(student.getAge());
 		return studentVO;
 
@@ -61,11 +63,53 @@ public class StudentDAOImpl implements StudentDAO {
 			return (covertEntityToVO(savedStudent));
 		}
 		final Student readbystudent = studentRepo.getById(studentVO.getId());
-		readbystudent.setName(studentVO.getName());
+		readbystudent.setStudentName(studentVO.getName());
 		// readbystudent.setAge(studentVO.getAge());
 		final Student savedStudent = studentRepo.save(readbystudent);
 		return (covertEntityToVO(savedStudent));
 
+	}
+
+	@Override
+	public StudentVO updateStudentById(final StudentVO studentVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteStudent(final int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StudentVO> findByStudentName(final String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StudentVO getStudentById(final int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StudentVO> getStudentsByPagination(final int pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StudentVO> getStudents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StudentVO saveStudent(final StudentVO studentVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
