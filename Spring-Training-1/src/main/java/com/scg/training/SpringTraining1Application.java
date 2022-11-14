@@ -29,9 +29,8 @@ public class SpringTraining1Application {
 //
 //		final Alien a1 = context.getBean(Alien.class);
 //		a1.show();
-		create(context);
+		// create(context);
 		// createEmployee(context);
-
 	}
 
 	public static void create(final ConfigurableApplicationContext context) {
@@ -49,8 +48,10 @@ public class SpringTraining1Application {
 			contact.setContactPersonName("Hance");
 			contact.setEmailId("hancepb@gmail.com");
 			contact.setMobileNumber(Long.valueOf(7345678933L));
-			final School school1 = new School("MarBasil", "Kothamangalam");
-			school1.setContact(contact);
+			final School school1 = new School();
+			school1.setSchoolName("mar basil");
+			school1.setCity("kothamangalam");
+			// school1.setContact(contact);
 			// schoolRepository.save(school1);
 			// final Audit audit = new Audit();
 //			audit.setCreatedTimestamp(now);
@@ -65,9 +66,10 @@ public class SpringTraining1Application {
 			final Laptop laptop1 = new Laptop("DELL");
 			final Laptop laptop2 = new Laptop("Lenovo");
 			final List<Laptop> l1 = Arrays.asList(laptop1, laptop2);
+			student1.setLaptop(null);
 			student1.setLaptop(l1);
 			student1.setSchool(school1);
-			studentDetails.setStudent(student1);
+			student1.setStudentDetails(studentDetails);
 			// studentDetails.setStudent(student1);
 //			final School school1 = new School("MarBasil", "Kothamangalam");
 //			student1.setSchool(school1);
@@ -84,10 +86,10 @@ public class SpringTraining1Application {
 //		student2.setSchool(school1);
 			System.out.println("hello");
 
-			studentDetailsRepository.save(studentDetails);
+			// studentDetailsRepository.save(studentDetails);
 			System.out.println("good...");
 			// studentRepository
-			// studentRepository.save(student1);
+			studentRepository.save(student1);
 
 		} catch (final Exception e) {
 			System.out.println("exception occured....");

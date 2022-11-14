@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -23,6 +25,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +45,7 @@ import lombok.extern.slf4j.Slf4j;
 //@NamedNativeQuery(name="carkey",query="select id as id,name as name,length as length,width as width,length*width as area from Car", resultSetMapping="carkey")
 @NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
 @EntityListeners(CustomAuditListener.class)
-public class Student extends Audit {
+public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -55,13 +59,15 @@ public class Student extends Audit {
 	@Enumerated(EnumType.ORDINAL)
 	private Gender gender;
 
-//	@Column(name = "created_at", updatable = false)
-//	private LocalDateTime createdAt;
-//	@Column(name = "updated_at", insertable = false)
-//	private LocalDateTime updatedAt;
+//	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "studentid")
+	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "studentid")
+	StudentDetails studentDetails;
 
 	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
+	@JsonIgnoreProperties("student")
 	private List<Laptop> laptop;
 //cascade types: ALL
 //	PERSIST
@@ -70,12 +76,13 @@ public class Student extends Audit {
 //	REFRESH
 //	DETACH
 
-//	@OneToOne
-//	StudentDetails studentDetails;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "schoolid", insertable = false, updatable = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "schoolid")
+	@JsonIgnoreProperties("student")
 	private School school;
+
+	@Embedded
+	Audit audit;
 
 //	public void setLaptop(final List<Laptop> l1) {
 //		// TODO Auto-generated method stub
@@ -94,6 +101,7 @@ public class Student extends Audit {
 		log.info("Attempting to add new user with username: " + studentName);
 		System.out.println("new user is adding to the datase");
 		// this.setStudentName("hari");
+
 	}
 
 	@PostPersist

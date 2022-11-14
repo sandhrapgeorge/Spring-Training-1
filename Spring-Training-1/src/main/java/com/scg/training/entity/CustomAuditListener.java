@@ -19,24 +19,25 @@ public class CustomAuditListener {
 	public void setCreatedOn(final Student stud) {
 		log.info("Attempting to add new student" + stud.getStudentName());
 		System.out.println("new user is adding to the datase" + stud.getStudentName());
-//		final Audit audit = stud.getAudit();
+		final Audit audit = stud.getAudit();
 
 		final LocalDateTime now = LocalDateTime.now();
-		stud.setCreatedTimestamp(now);
-		stud.setLastUpdatedTimestamp(now);
 
-		stud.setCreatedBy("ani");
-		stud.setLastUpdatedBy("vinu");
+		audit.setCreatedTimestamp(now);
+		audit.setLastUpdatedTimestamp(now);
+
+		audit.setCreatedBy("ani");
+		audit.setLastUpdatedBy("vinu");
 		System.out.println("data inserting on progress");
 
 	}
 
 	@PreUpdate
 	public void setUpdadtedOn(final Student stud) {
-		// final Audit audit = stud.getAudit();
+		final Audit audit = stud.getAudit();
 
-		stud.setLastUpdatedTimestamp(LocalDateTime.now());
-		stud.setLastUpdatedBy("abc");
+		audit.setLastUpdatedTimestamp(LocalDateTime.now());
+		audit.setLastUpdatedBy("abc");
 		System.out.println("data inserting on progress");
 	}
 

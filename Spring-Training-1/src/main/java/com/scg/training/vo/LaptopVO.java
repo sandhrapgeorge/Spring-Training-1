@@ -1,7 +1,5 @@
 package com.scg.training.vo;
 
-import com.scg.training.entity.Student;
-
 import lombok.Data;
 
 @Data
@@ -9,11 +7,11 @@ public class LaptopVO {
 
 	private int laptopId;
 	private String laptopName;
-	private Student student;
+	private StudentVO studentVO;
 
-	public LaptopVO(final String laptopName, final Student student) {
+	public LaptopVO(final String laptopName, final StudentVO studentVO) {
 		this.laptopName = laptopName;
-		this.student = student;
+		this.studentVO = studentVO;
 	}
 
 }

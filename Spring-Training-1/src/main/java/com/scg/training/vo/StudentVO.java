@@ -2,7 +2,7 @@ package com.scg.training.vo;
 
 import java.util.List;
 
-import com.scg.training.entity.StudentDetails;
+import com.scg.training.entity.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,14 +15,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class StudentVO {
 	private int id;
-	private String name;
-	private StudentDetails studentDetails;
-	List<LaptopVO> laptop;
+	private String studentName;
+	private Gender gender;
+	private StudentDetailsVO studentDetailsVO;
+	private SchoolVO schoolVO;
+	List<LaptopVO> laptopVO;
 
-	public StudentVO(final String name, final StudentDetails studentDetails, final List<LaptopVO> laptop) {
-		this.name = name;
-		this.studentDetails = studentDetails;
-		this.laptop = laptop;
+	public StudentVO(final String studentName, final Gender gender, final StudentDetailsVO studentDetailsVO,
+			final SchoolVO schoolVO, final List<LaptopVO> laptopVO) {
+		this.studentName = studentName;
+		this.gender = gender;
+		this.studentDetailsVO = studentDetailsVO;
+		this.schoolVO = schoolVO;
+		this.laptopVO = laptopVO;
 	}
-
 }

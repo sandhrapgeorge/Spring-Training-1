@@ -14,14 +14,17 @@ import com.scg.training.entity.Student;
 //extends JpaRepository<Student, Integer>
 @EnableJpaRepositories
 public interface StudentRepository extends JpaRepository<Student, Integer>, JpaSpecificationExecutor<Student> {
+//	@Query(value = "select * from student where studentid=:id", nativeQuery = true)
+	Student findByStudentid(int id);
 //	@Query(value = "select * from student where studentname=:studentname", nativeQuery = true)
-//	List<Student> findStudentByName(@Param("studentname") String studentName);
+
+	// List<Student> findStudentByName(@Param("studentname") String studentName);
 //	@Query("SELECT s FROM Student s WHERE s.name=:studentname")
 //	List<Student> findStudentByName(@Param("studentname") String studentName);
 
 	List<Student> findStudentByName(String name);
 
-	List<String> getSchoolByStudentById(int id);
+	// List<String> getSchoolByStudentById(int id);
 
 }
 //The @Query annotation takes precedence over named queries, which are annotated with @NamedQuery or defined in an orm.xml file.

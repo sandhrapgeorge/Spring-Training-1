@@ -1,20 +1,16 @@
 package com.scg.training.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.scg.training.repository.StudentRepository;
-import com.scg.training.service.StudentService;
 
 //@Component
 //@Controller
 //@RequestMapping("test1")
 @RestController
 public class StudentController1 {
-	@Autowired
-	private StudentService studentService;
-	@Autowired
-	private StudentRepository studentRepo;
+//	@Autowired
+//	private StudentService studentService;
+	// @Autowired
+	// private StudentRepository studentRepo;
 
 //	@PostMapping("/createstudent")
 //	@ResponseBody

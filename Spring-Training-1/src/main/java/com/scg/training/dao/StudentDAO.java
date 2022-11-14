@@ -2,29 +2,17 @@ package com.scg.training.dao;
 
 import java.util.List;
 
-import com.scg.training.vo.StudentVO;
+import com.scg.training.entity.Student;
 
 //@Repository
 public interface StudentDAO {
 
-	StudentVO insert(StudentVO studentVO) throws Exception;
+	Student saveStudent(Student student);
 
-	StudentVO readById(int id) throws Exception;
+	List<Student> getStudents();
 
-	StudentVO update(StudentVO studentVO) throws Exception;
-
-	StudentVO updateStudentById(StudentVO studentVO);
+	List<Student> getStudentByName(String studentName);
 
 	String deleteStudent(int id);
-
-	List<StudentVO> findByStudentName(String name);
-
-	StudentVO getStudentById(int id);
-
-	List<StudentVO> getStudentsByPagination(int pageNumber);
-
-	List<StudentVO> getStudents();
-
-	StudentVO saveStudent(StudentVO studentVO);
 
 }
