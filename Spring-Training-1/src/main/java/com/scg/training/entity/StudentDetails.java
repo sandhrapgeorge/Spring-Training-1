@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +28,12 @@ public class StudentDetails {
 	private String hobby;
 	private Double weight;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "studentid")
+	@JoinColumn(name = "studentDetailsId")
+	@JsonIgnore
 	Student student;
 
-	public StudentDetails(final String hobby, final Double weight) {
-		this.hobby = hobby;
-		this.weight = weight;
-	}
+//	public StudentDetails(final String hobby, final Double weight) {
+//		this.hobby = hobby;
+//		this.weight = weight;
+//	}
 }
