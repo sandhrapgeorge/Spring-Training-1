@@ -23,7 +23,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer>, JpaS
 //	List<Student> findStudentByName(@Param("studentname") String studentName);
 
 	List<Student> findStudentByName(String name);
-// getting unexpected error
+
 	// List<String> getSchoolByStudentById(int id);
 
 }
