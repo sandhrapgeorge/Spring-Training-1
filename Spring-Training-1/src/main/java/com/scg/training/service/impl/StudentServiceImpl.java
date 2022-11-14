@@ -18,10 +18,10 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student saveStudent(final Student student) throws Exception, InvalidInputException {
 		// TODO Auto-generated method stub
-//		final String regex = "^[a-zA-Z]*$";
-//		if (!student.getStudentName().matches(regex)) {
-//			throw new InvalidInputException("The given string is not a proper name");
-//		}
+		final String regex = "^[a-zA-Z]*$";
+		if (!student.getStudentName().matches(regex)) {
+			throw new InvalidInputException("The given string is not a proper name");
+		}
 		return studentDao.saveStudent(student);
 
 	}
