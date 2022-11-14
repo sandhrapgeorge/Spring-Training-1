@@ -53,7 +53,7 @@ public class Student extends Audit {
 //	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "studentid")
 	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "studentid")
+	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
 	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
