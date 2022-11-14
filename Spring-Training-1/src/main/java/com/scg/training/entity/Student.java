@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -18,12 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PostPersist;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
-import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,7 +25,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Setter
@@ -40,12 +32,11 @@ import lombok.extern.slf4j.Slf4j;
 @Table(name = "student")
 @NoArgsConstructor
 @AllArgsConstructor
-@Slf4j
 //@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
-//@NamedNativeQuery(name="carkey",query="select id as id,name as name,length as length,width as width,length*width as area from Car", resultSetMapping="carkey")
+
 @NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
 @EntityListeners(CustomAuditListener.class)
-public class Student {
+public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -81,54 +72,20 @@ public class Student {
 	@JsonIgnoreProperties("student")
 	private School school;
 
-	@Embedded
-	Audit audit;
+	public Student(final String studentName, final Gender gender, final StudentDetails studentDetails,
+			final List<Laptop> laptop, final School school) {
+		this.studentName = studentName;
+		this.gender = gender;
+		this.studentDetails = studentDetails;
+		this.laptop = laptop;
+		this.school = school;
+	}
 
 //	public void setLaptop(final List<Laptop> l1) {
 //		// TODO Auto-generated method stub
 //		this.laptop = l1;
 //
 //	}
-
-	public Student(final String name) {
-		this.studentName = name;
-		// this.audit = audit;
-		// int age = age;
-	}
-
-	@PrePersist
-	public void logNewUserAttempt() {
-		log.info("Attempting to add new user with username: " + studentName);
-		System.out.println("new user is adding to the datase");
-		// this.setStudentName("hari");
-
-	}
-
-	@PostPersist
-	public void logNewUserAdded() {
-		log.info("Added user '" + studentName + "' with ID: " + studentid);
-		System.out.println("new user is added to the datase..");
-	}
-
-	@PreRemove
-	public void logUserRemovalAttempt() {
-		log.info("Attempting to delete user: " + studentName);
-	}
-
-	@PostRemove
-	public void logUserRemoval() {
-		log.info("Deleted user: " + studentName);
-	}
-
-	@PreUpdate
-	public void logUserUpdateAttempt() {
-		log.info("Attempting to update user: " + studentName);
-	}
-
-	@PostUpdate
-	public void logUserUpdate() {
-		log.info("Updated user: " + studentName);
-	}
 
 }
 

@@ -16,47 +16,29 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomAuditListener {
 
 	@PrePersist
-	public void setCreatedOn(final Student stud) {
-		log.info("Attempting to add new student" + stud.getStudentName());
-		System.out.println("new user is adding to the datase" + stud.getStudentName());
-		final Audit audit = stud.getAudit();
+	public void setCreatedOn(final Student student) {
+		log.info("Attempting to add new student" + student.getStudentName());
+		System.out.println("new user is adding to the datase" + student.getStudentName());
+		// final Audit audit = stud.getAudit();
 
 		final LocalDateTime now = LocalDateTime.now();
 
-		audit.setCreatedTimestamp(now);
-		audit.setLastUpdatedTimestamp(now);
+		student.setCreatedTimestamp(now);
+		student.setLastUpdatedTimestamp(now);
 
-		audit.setCreatedBy("ani");
-		audit.setLastUpdatedBy("vinu");
+		student.setCreatedBy("ani");
+		student.setLastUpdatedBy("vinu");
 		System.out.println("data inserting on progress");
 
 	}
 
 	@PreUpdate
-	public void setUpdadtedOn(final Student stud) {
-		final Audit audit = stud.getAudit();
+	public void setUpdadtedOn(final Student student) {
+		// final Audit audit = stud.getAudit();
 
-		audit.setLastUpdatedTimestamp(LocalDateTime.now());
-		audit.setLastUpdatedBy("abc");
+		student.setLastUpdatedTimestamp(LocalDateTime.now());
+		student.setLastUpdatedBy("abc");
 		System.out.println("data inserting on progress");
 	}
 
 }
-//@PrePersist
-//public void saveAudit(final Employee employee) {
-//	employee.setVersion("1GL");
-//
-//}
-//
-//@PostPersist
-//public void setUpdadtedOn(final Employee employee) {
-//
-//	backup = new Audit(employee);
-//	final LocalDateTime now = LocalDateTime.now();
-//	backup.setCreatedTimestamp(now);
-//	backup.setLastUpdatedTimestamp(now);
-//
-//	backup.setCreatedBy("sandhra");
-//	backup.setLastUpdatedBy("system");
-//	emprep.save(backup);
-//

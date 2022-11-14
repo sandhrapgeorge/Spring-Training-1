@@ -10,7 +10,6 @@ import lombok.Data;
 public class Contact {
 
 	private String contactPersonName;
-	private String emailId;
 	private Long mobileNumber;
 
 }
