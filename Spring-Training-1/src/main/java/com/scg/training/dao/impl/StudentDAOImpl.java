@@ -17,23 +17,8 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public Student saveStudent(final Student student) {
-		// TODO Auto-generated method stub
-		// final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
-		// UserRecordDto userRecordDto =
-		// UserRecordMapper.INSTANCE.entityToDto(userRecord);
-		// re
-		// final Employee employee = employeeRequestMapper.toEntity(studentVO);
-
-//		final Audit audit1 = addAuditDetailsInsert();
-//		employee.setAudit(audit1);
-
-//		departmentRepository.save(employee.getDepartment());
-
-//		employee.setDepartment(departmentRepository.save(employee.getDepartment()));
-		// return employeeRequestMapper.toVO((employeeRepository.save(employee)));
-
-		// final Student s = new Student();
-		// return StudentMapper.INSTANCE.toVO((studentRepository.save(student)));
+//		final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
+//		return StudentMapper.INSTANCE.toVO(studentRepository.save(student));
 
 		return studentRepository.save(student);
 	}
@@ -41,12 +26,15 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> getStudents() {
 		// TODO Auto-generated method stub
+		// return StudentMapper.INSTANCE.toVOList(studentRepository.findAll());
 		return studentRepository.findAll();
 	}
 
 	@Override
 	public List<Student> getStudentByName(final String studentName) {
 		// TODO Auto-generated method stub
+		// return
+		// StudentMapper.INSTANCE.toVOList(studentRepository.findStudentByName(studentName));
 		return studentRepository.findStudentByName(studentName);
 	}
 

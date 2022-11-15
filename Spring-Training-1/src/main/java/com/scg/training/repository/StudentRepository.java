@@ -3,8 +3,7 @@ package com.scg.training.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.scg.training.entity.Student;
@@ -12,9 +11,9 @@ import com.scg.training.entity.Student;
 @Repository
 //@Component
 //extends JpaRepository<Student, Integer>
-@EnableJpaRepositories
-public interface StudentRepository extends JpaRepository<Student, Integer>, JpaSpecificationExecutor<Student> {
-//	@Query(value = "select * from student where studentid=:id", nativeQuery = true)
+//@EnableJpaRepositories
+public interface StudentRepository extends JpaRepository<Student, Integer> {
+	@Query(value = "selec * from student where studentid=:id", nativeQuery = true)
 	Student findByStudentid(int id);
 //	@Query(value = "select * from student where studentname=:studentname", nativeQuery = true)
 

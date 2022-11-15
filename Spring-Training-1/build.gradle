@@ -35,6 +35,10 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	compileOnly 'org.mapstruct:mapstruct-processor:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+    // https://mvnrepository.com/artifact/org.springframework/spring-aop
+	implementation 'org.springframework:spring-aop:5.3.23'
+    
+  
 }
 
 dependencyManagement {

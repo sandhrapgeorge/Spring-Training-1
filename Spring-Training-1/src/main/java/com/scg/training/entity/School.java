@@ -26,7 +26,7 @@ import lombok.Setter;
 public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int schoolid;
+	private Integer schoolid;
 	private String schoolName;
 	private String city;
 

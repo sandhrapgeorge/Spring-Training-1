@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentVO {
-	private int id;
+	private Integer id;
 	private String studentName;
 	private Gender gender;
 	private StudentDetailsVO studentDetailsVO;

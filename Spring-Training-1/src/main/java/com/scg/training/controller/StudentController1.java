@@ -1,29 +1,31 @@
 package com.scg.training.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.scg.training.entity.Student;
+import com.scg.training.exception.InvalidInputException;
+import com.scg.training.service.StudentService;
 
 //@Component
-//@Controller
+@Controller
 //@RequestMapping("test1")
-@RestController
+//@RestController
 public class StudentController1 {
-//	@Autowired
-//	private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 	// @Autowired
 	// private StudentRepository studentRepo;
 
-//	@PostMapping("/createstudent")
-//	@ResponseBody
-//	public String insert(@RequestBody final StudentVO studentVO) throws InvalidInputException, Exception {
-//		// TODO Auto-generated method stub
-
-//		System.out.println(s1.getClass());
-//		System.out.println(a1);
-	// System.out.println(nicknames);
-//		System.out.println("hii");
-//		return studentService.insert(studentVO);
-//		// return null;
-//	}
+	@PostMapping("test/createstudent")
+	// @ResponseBody
+	public Student insert(@RequestBody final Student student) throws InvalidInputException, Exception {
+		// TODO Auto-generated method stub
+		System.out.println("HIII............");
+		return studentService.saveStudent(student);
+	}
 
 //	@GetMapping("/student/{id}")
 //	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {

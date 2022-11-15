@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Laptop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int laptopid;
+	private Integer laptopid;
 	private String laptopName;
 
 	public Laptop(final String laptopName) {

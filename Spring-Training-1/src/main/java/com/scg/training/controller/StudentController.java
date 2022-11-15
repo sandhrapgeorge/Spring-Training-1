@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.scg.training.aop.ExecutionTime;
 import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
 
 @RestController
+//@Controller
 @RequestMapping("students")
 public class StudentController {
 
@@ -30,12 +33,16 @@ public class StudentController {
 	}
 
 	@GetMapping
-	public List<Student> getStudents() {
+	@ResponseBody
+	@ExecutionTime
+	public List<Student> getStudents() throws InterruptedException {
+		Thread.sleep(20);
 		return studentService.getStudents();
 
 	}
 
 	@GetMapping("/{studentName}")
+	@ResponseBody
 	public List<Student> getStudentByName(@PathVariable final String studentName) {
 
 		return studentService.getStudentByName(studentName);

@@ -23,7 +23,6 @@ public class StudentServiceImpl implements StudentService {
 			throw new InvalidInputException("The given string is not a proper name");
 		}
 		return studentDao.saveStudent(student);
-
 	}
 
 	@Override

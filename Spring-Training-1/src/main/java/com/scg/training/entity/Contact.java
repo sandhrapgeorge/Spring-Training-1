@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 @Embeddable
-
 public class Contact {
 
 	private String contactPersonName;
