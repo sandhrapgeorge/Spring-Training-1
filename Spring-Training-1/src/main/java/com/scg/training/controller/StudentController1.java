@@ -1,29 +1,32 @@
 package com.scg.training.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//@Component
-//@Controller
+import com.scg.training.entity.Student;
+import com.scg.training.exception.InvalidInputException;
+import com.scg.training.service.StudentService;
+
+import lombok.extern.slf4j.Slf4j;
+
 //@RequestMapping("test1")
 @RestController
+@Slf4j
 public class StudentController1 {
-//	@Autowired
-//	private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 	// @Autowired
 	// private StudentRepository studentRepo;
 
-//	@PostMapping("/createstudent")
-//	@ResponseBody
-//	public String insert(@RequestBody final StudentVO studentVO) throws InvalidInputException, Exception {
-//		// TODO Auto-generated method stub
-
-//		System.out.println(s1.getClass());
-//		System.out.println(a1);
-	// System.out.println(nicknames);
-//		System.out.println("hii");
-//		return studentService.insert(studentVO);
-//		// return null;
-//	}
+	@PostMapping("test/createstudent")
+	// @ResponseBody
+	public Student insert(@RequestBody final Student student) throws InvalidInputException, Exception {
+		// TODO Auto-generated method stub
+		log.info("HIII............");
+		return studentService.saveStudent(student);
+	}
 
 //	@GetMapping("/student/{id}")
 //	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {
@@ -39,10 +42,10 @@ public class StudentController1 {
 //	@GetMapping("/student/{id}")
 //	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {
 //		final Student readbystudent = studentRepo.getById(id);
-//		System.err.println(readbystudent.getStudentName());
+//		log.info(readbystudent.getStudentName());
 //		final List<Laptop> lap = readbystudent.getLaptop();
 //		for (final Laptop l : lap) {
-//			System.out.println(l.getLaptopName());
+//			log.info(l.getLaptopName());
 //		}
 //		final Optional<String> user = Optional.ofNullable(studentService.readById(id));
 //		if (user.isPresent()) {
@@ -57,9 +60,9 @@ public class StudentController1 {
 //
 //		final List<Student> studentlist = studentRepo.findStudentByName(studentname);
 //		for (final Student s : studentlist) {
-//			System.out.println("\nstudent id:" + s.getStudentid());
-//			System.out.println("student name:" + s.getName());
-//			System.out.println("Gender" + s.getGender());
+//			log.info("\nstudent id:" + s.getStudentid());
+//			log.info("student name:" + s.getName());
+//			log.info("Gender" + s.getGender());
 //		}
 //		return "hii";
 //
@@ -67,7 +70,7 @@ public class StudentController1 {
 
 //	@PutMapping("/updatestudent/{id}")
 //	public String update(@RequestBody final StudentVO studentVO) throws Exception {
-//		System.out.println(studentVO.getAge());
+//		log.info(studentVO.getAge());
 //		return studentService.update(studentVO);
 //
 //	}

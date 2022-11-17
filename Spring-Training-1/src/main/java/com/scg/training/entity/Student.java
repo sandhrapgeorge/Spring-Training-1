@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -33,26 +32,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 //@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
-
-@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
-@EntityListeners(CustomAuditListener.class)
+@NamedNativeQuery(name = "Student.findStudentByName", query = "selec * from student where studentname=?", resultClass = Student.class)
 public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	// @GeneratedValue(strategy = GenerationType.AUTO, generator =
-	// "student_generator")
-	// @SequenceGenerator(name = "student_generator", initialValue = 1,
-	// allocationSize = 2, sequenceName = "student_hibernate1")
-	private int studentid;
-	@Column(name = "studentname", length = 50, nullable = false, unique = true)
+	private Integer studentid;
+	@Column(name = "studentname", length = 5, nullable = false, unique = true)
+
 	private String studentName;
 	@Enumerated(EnumType.ORDINAL)
 	private Gender gender;
 
-//	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "studentid")
-	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
@@ -60,12 +52,7 @@ public class Student extends Audit {
 	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
 	@JsonIgnoreProperties("student")
 	private List<Laptop> laptop;
-//cascade types: ALL
-//	PERSIST
-//	MERGE
-//	REMOVE
-//	REFRESH
-//	DETACH
+//cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "schoolid")
@@ -80,13 +67,6 @@ public class Student extends Audit {
 		this.laptop = laptop;
 		this.school = school;
 	}
-
-//	public void setLaptop(final List<Laptop> l1) {
-//		// TODO Auto-generated method stub
-//		this.laptop = l1;
-//
-//	}
-
 }
 
 //JPA( Java Persistence API) is a specification which specifies how to access, manage and

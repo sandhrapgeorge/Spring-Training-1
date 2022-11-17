@@ -2,51 +2,50 @@ package com.scg.training.dao.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scg.training.dao.StudentDAO;
 import com.scg.training.entity.Student;
+import com.scg.training.mapper.StudentMapper;
 import com.scg.training.repository.StudentRepository;
+import com.scg.training.vo.StudentVO;
 
 @Component
 //@Repository
 public class StudentDAOImpl implements StudentDAO {
 	@Autowired
-	StudentRepository studentRepository;
+	private StudentRepository studentRepository;
+	@Autowired
+	private StudentMapper studentMapper;
+//	@Autowired
+//	private LaptopMapper mapper2;
 
 	@Override
+	@Transactional
 	public Student saveStudent(final Student student) {
-		// TODO Auto-generated method stub
-		// final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
-		// UserRecordDto userRecordDto =
-		// UserRecordMapper.INSTANCE.entityToDto(userRecord);
-		// re
-		// final Employee employee = employeeRequestMapper.toEntity(studentVO);
-
-//		final Audit audit1 = addAuditDetailsInsert();
-//		employee.setAudit(audit1);
-
-//		departmentRepository.save(employee.getDepartment());
-
-//		employee.setDepartment(departmentRepository.save(employee.getDepartment()));
-		// return employeeRequestMapper.toVO((employeeRepository.save(employee)));
-
-		// final Student s = new Student();
-		// return StudentMapper.INSTANCE.toVO((studentRepository.save(student)));
+//		final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
+//		return StudentMapper.INSTANCE.toVO(studentRepository.save(student));
 
 		return studentRepository.save(student);
 	}
 
 	@Override
-	public List<Student> getStudents() {
+	public List<StudentVO> getStudents() {
 		// TODO Auto-generated method stub
-		return studentRepository.findAll();
+		final List<Student> students = studentRepository.findAll();
+		return studentMapper.toVOList(students);
+		// return studentRepository.findAll();
+		// return null;
 	}
 
 	@Override
 	public List<Student> getStudentByName(final String studentName) {
 		// TODO Auto-generated method stub
+		// return
+		// StudentMapper.INSTANCE.toVOList(studentRepository.findStudentByName(studentName));
 		return studentRepository.findStudentByName(studentName);
 	}
 

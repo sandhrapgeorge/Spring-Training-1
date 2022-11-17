@@ -6,8 +6,9 @@ import org.mapstruct.Mapping;
 import com.scg.training.entity.Laptop;
 import com.scg.training.vo.LaptopVO;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = { StudentMapper.class })
 public interface LaptopMapper {
+
 	@Mapping(source = "laptopid", target = "laptopId")
 	@Mapping(source = "student", target = "studentVO")
 	LaptopVO toVo(Laptop laptop);

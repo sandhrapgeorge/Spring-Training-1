@@ -3,6 +3,7 @@ package com.scg.training.entity;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @MappedSuperclass
+@EntityListeners(CustomAuditListener.class)
 public class Audit {
 
 	@Column(name = "created_by", updatable = false)

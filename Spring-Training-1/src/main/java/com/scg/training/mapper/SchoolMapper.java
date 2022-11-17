@@ -8,8 +8,9 @@ import org.mapstruct.Mapping;
 import com.scg.training.entity.School;
 import com.scg.training.vo.SchoolVO;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = { StudentMapper.class })
 public interface SchoolMapper {
+
 	@Mapping(source = "student", target = "studentVO")
 	SchoolVO toVO(School school);
 

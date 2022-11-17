@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
+import com.scg.training.vo.StudentVO;
 
 //@Service
 //@Component
@@ -11,7 +12,7 @@ public interface StudentService {
 
 	Student saveStudent(Student student) throws Exception, InvalidInputException;
 
-	List<Student> getStudents();
+	List<StudentVO> getStudents();
 
 	List<Student> getStudentByName(String studentName);
 
