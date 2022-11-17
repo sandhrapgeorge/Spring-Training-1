@@ -16,6 +16,7 @@ import com.scg.training.aop.ExecutionTime;
 import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
+import com.scg.training.vo.StudentVO;
 
 @RestController
 //@Controller
@@ -35,7 +36,7 @@ public class StudentController {
 	@GetMapping
 	@ResponseBody
 	@ExecutionTime
-	public List<Student> getStudents() throws InterruptedException {
+	public List<StudentVO> getStudents() throws InterruptedException {
 		Thread.sleep(20);
 		return studentService.getStudents();
 

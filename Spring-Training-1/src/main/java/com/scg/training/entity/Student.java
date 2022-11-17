@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @AllArgsConstructor
 //@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
 @NamedNativeQuery(name = "Student.findStudentByName", query = "selec * from student where studentname=?", resultClass = Student.class)
-@EntityListeners(CustomAuditListener.class)
 public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

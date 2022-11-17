@@ -6,7 +6,7 @@ import com.scg.training.vo.SchoolVO;
 
 public interface SchoolService {
 
-	SchoolVO saveSchool(SchoolVO departmentVo);
+	String saveSchool(String city);
 
 	List<SchoolVO> getSchool();
 

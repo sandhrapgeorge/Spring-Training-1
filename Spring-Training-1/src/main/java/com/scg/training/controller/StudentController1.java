@@ -1,18 +1,19 @@
 package com.scg.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
 
-//@Component
-@Controller
+import lombok.extern.slf4j.Slf4j;
+
 //@RequestMapping("test1")
-//@RestController
+@RestController
+@Slf4j
 public class StudentController1 {
 	@Autowired
 	private StudentService studentService;
@@ -23,7 +24,7 @@ public class StudentController1 {
 	// @ResponseBody
 	public Student insert(@RequestBody final Student student) throws InvalidInputException, Exception {
 		// TODO Auto-generated method stub
-		System.out.println("HIII............");
+		log.info("HIII............");
 		return studentService.saveStudent(student);
 	}
 
@@ -41,10 +42,10 @@ public class StudentController1 {
 //	@GetMapping("/student/{id}")
 //	public ResponseEntity<String> getById(@PathVariable final int id) throws Exception {
 //		final Student readbystudent = studentRepo.getById(id);
-//		System.err.println(readbystudent.getStudentName());
+//		log.info(readbystudent.getStudentName());
 //		final List<Laptop> lap = readbystudent.getLaptop();
 //		for (final Laptop l : lap) {
-//			System.out.println(l.getLaptopName());
+//			log.info(l.getLaptopName());
 //		}
 //		final Optional<String> user = Optional.ofNullable(studentService.readById(id));
 //		if (user.isPresent()) {
@@ -59,9 +60,9 @@ public class StudentController1 {
 //
 //		final List<Student> studentlist = studentRepo.findStudentByName(studentname);
 //		for (final Student s : studentlist) {
-//			System.out.println("\nstudent id:" + s.getStudentid());
-//			System.out.println("student name:" + s.getName());
-//			System.out.println("Gender" + s.getGender());
+//			log.info("\nstudent id:" + s.getStudentid());
+//			log.info("student name:" + s.getName());
+//			log.info("Gender" + s.getGender());
 //		}
 //		return "hii";
 //
@@ -69,7 +70,7 @@ public class StudentController1 {
 
 //	@PutMapping("/updatestudent/{id}")
 //	public String update(@RequestBody final StudentVO studentVO) throws Exception {
-//		System.out.println(studentVO.getAge());
+//		log.info(studentVO.getAge());
 //		return studentService.update(studentVO);
 //
 //	}

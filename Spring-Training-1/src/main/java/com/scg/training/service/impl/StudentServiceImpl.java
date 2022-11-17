@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.scg.training.dao.StudentDAO;
 import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
+import com.scg.training.vo.StudentVO;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -16,6 +19,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDAO studentDao;
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public Student saveStudent(final Student student) throws Exception, InvalidInputException {
 		// TODO Auto-generated method stub
 		final String regex = "^[a-zA-Z]*$";
@@ -26,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getStudents() {
+	public List<StudentVO> getStudents() {
 		// TODO Auto-generated method stub
 		return studentDao.getStudents();
 	}

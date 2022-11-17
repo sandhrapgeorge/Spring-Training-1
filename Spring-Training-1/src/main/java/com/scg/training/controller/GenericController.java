@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.scg.training.Cat;
 import com.scg.training.Printer;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class GenericController {
 
 	@GetMapping("generics")
 	public String getFoos() {
-		System.out.println("Hii");
+		log.info("Hii");
 		final List list = new ArrayList();
 		// list.add(10);
 		list.add("10");
 		final String s = (String) list.get(0);
-		System.out.println(s);
+		log.info(s);
 
 		final List<Integer> list1 = new ArrayList<>();
 		list1.add(10);
@@ -46,10 +49,10 @@ public class GenericController {
 		final Integer[] intArray = { 10, 20, 30, 40, 50 };
 		final Character[] charArray = { 's', 'i', 'n', 'i' };
 
-		System.out.println("Printing Integer Array");
+		log.info("Printing Integer Array");
 		printArray(intArray);
 
-		System.out.println("Printing Character Array");
+		log.info("Printing Character Array");
 		printArray(charArray);
 
 		shout("Happyyy..", 89);
@@ -59,20 +62,20 @@ public class GenericController {
 		final List<Integer> l1 = new ArrayList<>();
 		l1.add(10);
 		l1.add(20);
-		System.out.println("displaying the sum= " + add(l1));
+		log.info("displaying the sum= " + add(l1));
 
 		final List<Double> l2 = new ArrayList<>();
 		l2.add(30.0);
 		l2.add(40.0);
-		System.out.println("displaying the sum= " + add(l2));
+		log.info("displaying the sum= " + add(l2));
 
 	}
 
 	public static <E> void printArray(final E[] elements) {
 		for (final E element : elements) {
-			System.out.println(element);
+			log.info("" + element);
 		}
-		System.out.println();
+		log.info("");
 	}
 
 	public static Double add(final List<? extends Number> list) {
@@ -86,8 +89,8 @@ public class GenericController {
 	}
 
 	public static <T, V> void shout(final T thingsToShout, final V otherThingsToShout) {
-		System.out.println(thingsToShout + ".......");
-		System.out.println(otherThingsToShout + "******");
+		log.info(thingsToShout + ".......");
+		log.info(otherThingsToShout + "******");
 	}
 
 }

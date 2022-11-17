@@ -1,5 +1,7 @@
 package com.scg.training.dao;
 
-public interface SchoolDAO {
+import com.scg.training.entity.School;
 
+public interface SchoolDAO {
+	String saveSchool(School school);
 }

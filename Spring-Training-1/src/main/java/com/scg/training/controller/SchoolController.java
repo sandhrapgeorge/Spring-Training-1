@@ -9,18 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.scg.training.service.SchoolService;
 import com.scg.training.vo.SchoolVO;
 
+@RestController
+@RequestMapping("schools")
 public class SchoolController {
 
 	@Autowired
 	private SchoolService schoolService;
 
-	@PostMapping
-	public SchoolVO saveSchool(@RequestBody final SchoolVO departmentVo) {
-		return schoolService.saveSchool(departmentVo);
+	@PostMapping("/{city}")
+	public String saveSchool(@PathVariable final String city) {
+		return schoolService.saveSchool(city);
 
 	}
 

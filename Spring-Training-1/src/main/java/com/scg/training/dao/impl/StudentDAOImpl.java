@@ -2,20 +2,29 @@ package com.scg.training.dao.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scg.training.dao.StudentDAO;
 import com.scg.training.entity.Student;
+import com.scg.training.mapper.StudentMapper;
 import com.scg.training.repository.StudentRepository;
+import com.scg.training.vo.StudentVO;
 
 @Component
 //@Repository
 public class StudentDAOImpl implements StudentDAO {
 	@Autowired
-	StudentRepository studentRepository;
+	private StudentRepository studentRepository;
+	@Autowired
+	private StudentMapper studentMapper;
+//	@Autowired
+//	private LaptopMapper mapper2;
 
 	@Override
+	@Transactional
 	public Student saveStudent(final Student student) {
 //		final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
 //		return StudentMapper.INSTANCE.toVO(studentRepository.save(student));
@@ -24,10 +33,12 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public List<Student> getStudents() {
+	public List<StudentVO> getStudents() {
 		// TODO Auto-generated method stub
-		// return StudentMapper.INSTANCE.toVOList(studentRepository.findAll());
-		return studentRepository.findAll();
+		final List<Student> students = studentRepository.findAll();
+		return studentMapper.toVOList(students);
+		// return studentRepository.findAll();
+		// return null;
 	}
 
 	@Override
