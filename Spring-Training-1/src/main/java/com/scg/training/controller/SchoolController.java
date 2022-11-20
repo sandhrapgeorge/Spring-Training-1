@@ -23,7 +23,7 @@ public class SchoolController {
 	private SchoolService schoolService;
 
 	@PostMapping("/{city}")
-	public String saveSchool(@PathVariable final String city) {
+	public String saveSchool(@PathVariable final String city) throws InterruptedException {
 		return schoolService.saveSchool(city);
 
 	}
@@ -41,8 +41,8 @@ public class SchoolController {
 	}
 
 	@GetMapping("/name/{name}")
-	public SchoolVO findByName(@PathVariable final String name) {
-		return schoolService.findBySchoolName(name);
+	public SchoolVO getBySchoolName(@PathVariable final String name) {
+		return schoolService.getBySchoolName(name);
 	}
 
 	@DeleteMapping("/{id}")
@@ -54,6 +54,11 @@ public class SchoolController {
 	@PutMapping
 	public SchoolVO updateSchoolById(@RequestBody final SchoolVO DepartmentVo) {
 		return schoolService.updateShoolById(DepartmentVo);
+	}
+
+	@GetMapping("/search/{name}")
+	public List<SchoolVO> searchByName(@PathVariable final String name) {
+		return schoolService.searchBySchoolName(name);
 	}
 
 }

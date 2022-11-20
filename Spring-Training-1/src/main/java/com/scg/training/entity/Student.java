@@ -32,29 +32,29 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 //@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
-@NamedNativeQuery(name = "Student.findStudentByName", query = "selec * from student where studentname=?", resultClass = Student.class)
+@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
 public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Integer studentid;
-	@Column(name = "studentname", length = 5, nullable = false, unique = true)
+	@Column(name = "studentname", length = 30, nullable = false, unique = true)
 
 	private String studentName;
 	@Enumerated(EnumType.ORDINAL)
 	private Gender gender;
 
-	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
-	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
 	@JsonIgnoreProperties("student")
 	private List<Laptop> laptop;
 //cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "schoolid")
 	@JsonIgnoreProperties("student")
 	private School school;
@@ -67,6 +67,7 @@ public class Student extends Audit {
 		this.laptop = laptop;
 		this.school = school;
 	}
+
 }
 
 //JPA( Java Persistence API) is a specification which specifies how to access, manage and

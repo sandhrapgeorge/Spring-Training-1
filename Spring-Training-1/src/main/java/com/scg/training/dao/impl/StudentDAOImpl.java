@@ -14,7 +14,6 @@ import com.scg.training.repository.StudentRepository;
 import com.scg.training.vo.StudentVO;
 
 @Component
-//@Repository
 public class StudentDAOImpl implements StudentDAO {
 	@Autowired
 	private StudentRepository studentRepository;
@@ -25,28 +24,29 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	@Transactional
-	public Student saveStudent(final Student student) {
-//		final Student student = StudentMapper.INSTANCE.toEntity(studentVO);
-//		return StudentMapper.INSTANCE.toVO(studentRepository.save(student));
+	public StudentVO saveStudent(final StudentVO studentVO) {
+		final Student student = studentMapper.toEntity(studentVO);
+		return studentMapper.toVO(studentRepository.save(student));
 
-		return studentRepository.save(student);
+		// return studentRepository.save(studentVO);
 	}
 
 	@Override
 	public List<StudentVO> getStudents() {
 		// TODO Auto-generated method stub
-		final List<Student> students = studentRepository.findAll();
-		return studentMapper.toVOList(students);
+		// final List<Student> students = studentRepository.findAll();
+		return studentMapper.toVOList(studentRepository.findAll());
+
 		// return studentRepository.findAll();
 		// return null;
 	}
 
 	@Override
-	public List<Student> getStudentByName(final String studentName) {
+	public List<StudentVO> getStudentByName(final String studentName) {
 		// TODO Auto-generated method stub
 		// return
 		// StudentMapper.INSTANCE.toVOList(studentRepository.findStudentByName(studentName));
-		return studentRepository.findStudentByName(studentName);
+		return studentMapper.toVOList(studentRepository.findStudentByName(studentName));
 	}
 
 	@Override

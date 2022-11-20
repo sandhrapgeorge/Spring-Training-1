@@ -10,11 +10,12 @@ import com.scg.training.vo.LaptopVO;
 public interface LaptopMapper {
 
 	@Mapping(source = "laptopid", target = "laptopId")
-	@Mapping(source = "student", target = "studentVO")
+//	@Mapping(source = "student", target = "studentVO")
 	LaptopVO toVo(Laptop laptop);
 
 	@Mapping(source = "laptopId", target = "laptopid")
-	@Mapping(source = "studentVO", target = "student")
+	// @Mapping(source = "studentVO", target = "student")
+	@Mapping(target = "student", ignore = true)
 	Laptop toEntity(LaptopVO laptopvo);
 
 }

@@ -3,8 +3,10 @@ package com.scg.training.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,10 +29,11 @@ public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer schoolid;
+	@Column(name = "school_name", unique = true)
 	private String schoolName;
 	private String city;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid")
 	private List<Student> student;
 	@Embedded

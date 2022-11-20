@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.scg.training.dao.StudentDAO;
-import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
 import com.scg.training.vo.StudentVO;
@@ -18,15 +15,18 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentDAO studentDao;
 
+	// @Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
-	public Student saveStudent(final Student student) throws Exception, InvalidInputException {
+	public StudentVO saveStudent(final StudentVO studentVO) throws Exception, InvalidInputException {
 		// TODO Auto-generated method stub
 		final String regex = "^[a-zA-Z]*$";
-		if (!student.getStudentName().matches(regex)) {
+		if (!studentVO.getStudentName().matches(regex)) {
 			throw new InvalidInputException("The given string is not a proper name");
 		}
-		return studentDao.saveStudent(student);
+//		final String name=studentVO.getSchoolVO().getSchoolName();
+//		if() {
+		return studentDao.saveStudent(studentVO);
+		// }
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getStudentByName(final String studentName) {
+	public List<StudentVO> getStudentByName(final String studentName) {
 		// TODO Auto-generated method stub
 		return studentDao.getStudentByName(studentName);
 	}

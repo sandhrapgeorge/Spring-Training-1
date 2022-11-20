@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
+import com.scg.training.vo.StudentVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,10 +22,10 @@ public class StudentController1 {
 
 	@PostMapping("test/createstudent")
 	// @ResponseBody
-	public Student insert(@RequestBody final Student student) throws InvalidInputException, Exception {
+	public StudentVO insert(@RequestBody final StudentVO studentVO) throws InvalidInputException, Exception {
 		// TODO Auto-generated method stub
 		log.info("HIII............");
-		return studentService.saveStudent(student);
+		return studentService.saveStudent(studentVO);
 	}
 
 //	@GetMapping("/student/{id}")

@@ -22,11 +22,11 @@ public class StudentVO {
 	List<LaptopVO> laptopVO;
 
 	public StudentVO(final String studentName, final Gender gender, final StudentDetailsVO studentDetailsVO,
-			final SchoolVO schoolVO, final List<LaptopVO> laptopVO) {
+			final List<LaptopVO> laptopVO) {
 		this.studentName = studentName;
 		this.gender = gender;
 		this.studentDetailsVO = studentDetailsVO;
-		this.schoolVO = schoolVO;
+//		this.schoolVO = schoolVO;
 		this.laptopVO = laptopVO;
 	}
 }

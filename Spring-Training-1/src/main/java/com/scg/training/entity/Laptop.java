@@ -1,7 +1,7 @@
 package com.scg.training.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +30,7 @@ public class Laptop {
 		this.laptopName = laptopName;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
 	private Student student;
 

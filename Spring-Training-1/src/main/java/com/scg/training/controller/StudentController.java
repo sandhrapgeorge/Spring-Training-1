@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scg.training.aop.ExecutionTime;
-import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.service.StudentService;
 import com.scg.training.vo.StudentVO;
@@ -29,8 +28,8 @@ public class StudentController {
 //	private StudentRepository studentRepository;
 
 	@PostMapping
-	public Student saveStudent(@RequestBody final Student student) throws InvalidInputException, Exception {
-		return studentService.saveStudent(student);
+	public StudentVO saveStudent(@RequestBody final StudentVO studentVO) throws InvalidInputException, Exception {
+		return studentService.saveStudent(studentVO);
 	}
 
 	@GetMapping
@@ -44,7 +43,7 @@ public class StudentController {
 
 	@GetMapping("/{studentName}")
 	@ResponseBody
-	public List<Student> getStudentByName(@PathVariable final String studentName) {
+	public List<StudentVO> getStudentByName(@PathVariable final String studentName) {
 
 		return studentService.getStudentByName(studentName);
 

@@ -53,3 +53,12 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+sourceSets {
+  main {
+    java {
+      srcDir 'build/generated/sources/annotationProcessor/java/main'
+    }
+  }
+  test.compileClasspath += configurations.compileOnly
+  test.runtimeClasspath += configurations.compileOnly
+}
