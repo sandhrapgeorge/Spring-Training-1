@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.scg.training.feignUtil.JavaDesignPatternService;
 import com.scg.training.service.SchoolService;
 import com.scg.training.vo.SchoolVO;
 
 @RestController
 @RequestMapping("schools")
 public class SchoolController {
-
+	@Autowired
+	JavaDesignPatternService javaDesignPatternService;
 	@Autowired
 	private SchoolService schoolService;
 
@@ -52,8 +54,9 @@ public class SchoolController {
 	}
 
 	@PutMapping
-	public SchoolVO updateSchoolById(@RequestBody final SchoolVO DepartmentVo) {
-		return schoolService.updateShoolById(DepartmentVo);
+	public String updateSchoolById(@RequestBody final SchoolVO DepartmentVo) {
+		return javaDesignPatternService.stateDesign();
+		// return schoolService.updateShoolById(DepartmentVo);
 	}
 
 	@GetMapping("/search/{name}")

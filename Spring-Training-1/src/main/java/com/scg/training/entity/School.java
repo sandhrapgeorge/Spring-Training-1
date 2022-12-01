@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @Table(name = "school")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +36,10 @@ public class School {
 	private String city;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid")
+	@JoinColumn(name = "schoolid")
+	// referencedColumnName = "schoolid"
 	private List<Student> student;
 	@Embedded
 	Contact contact;
-
-	public School(final String schoolName, final String city, final List<Student> student, final Contact contact) {
-		this.schoolName = schoolName;
-		this.city = city;
-		this.student = student;
-		this.contact = contact;
-	}
 
 }

@@ -2,8 +2,6 @@ package com.scg.training.dao.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,20 +11,31 @@ import com.scg.training.mapper.StudentMapper;
 import com.scg.training.repository.StudentRepository;
 import com.scg.training.vo.StudentVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class StudentDAOImpl implements StudentDAO {
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
 	private StudentMapper studentMapper;
-//	@Autowired
-//	private LaptopMapper mapper2;
 
+//	@Autowired
+//	private LaptopMapper mapper2
 	@Override
-	@Transactional
+	// @Transactional(propagation = Propagation.REQUIRES_NEW, isolation =
+	// Isolation.SERIALIZABLE)
 	public StudentVO saveStudent(final StudentVO studentVO) {
+		// final Student student1 =
+		// Mappers.getMapper(StudentMapper.class).toEntity(studentVO);
 		final Student student = studentMapper.toEntity(studentVO);
-		return studentMapper.toVO(studentRepository.save(student));
+		// log.info("student laptop : " + student.getLaptop());
+		final Student stud = studentRepository.save(student);
+		final StudentVO studentVO1 = studentMapper.toVO(stud);
+		// final StudentVO studentVO2 =
+		// Mappers.getMapper(StudentMapper.class).toVO(student1);
+		return studentVO1;
 
 		// return studentRepository.save(studentVO);
 	}

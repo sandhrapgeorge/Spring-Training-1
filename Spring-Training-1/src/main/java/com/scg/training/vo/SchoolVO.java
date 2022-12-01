@@ -16,6 +16,7 @@ public class SchoolVO {
 	private int schoolid;
 	private String schoolName;
 	private String city;
+
 	// List<StudentVO> studentVO;
 
 	public SchoolVO(final String schoolName, final String city) {

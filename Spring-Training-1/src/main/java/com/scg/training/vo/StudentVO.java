@@ -1,7 +1,5 @@
 package com.scg.training.vo;
 
-import java.util.List;
-
 import com.scg.training.entity.Gender;
 
 import lombok.AllArgsConstructor;
@@ -19,14 +17,15 @@ public class StudentVO {
 	private Gender gender;
 	private StudentDetailsVO studentDetailsVO;
 	private SchoolVO schoolVO;
-	List<LaptopVO> laptopVO;
+	// List<LaptopVO> laptopVO;
 
 	public StudentVO(final String studentName, final Gender gender, final StudentDetailsVO studentDetailsVO,
-			final List<LaptopVO> laptopVO) {
+			final SchoolVO schoolVO) {
 		this.studentName = studentName;
 		this.gender = gender;
 		this.studentDetailsVO = studentDetailsVO;
-//		this.schoolVO = schoolVO;
-		this.laptopVO = laptopVO;
+		this.schoolVO = schoolVO;
+		// this.laptopVO = laptopVO;
 	}
+
 }

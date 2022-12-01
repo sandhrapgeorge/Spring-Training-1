@@ -36,7 +36,7 @@ public class StudentController {
 	@ResponseBody
 	@ExecutionTime
 	public List<StudentVO> getStudents() throws InterruptedException {
-		Thread.sleep(20);
+		// Thread.sleep(20);
 		return studentService.getStudents();
 
 	}

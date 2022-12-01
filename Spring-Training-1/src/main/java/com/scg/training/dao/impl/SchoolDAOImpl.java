@@ -38,7 +38,7 @@ public class SchoolDAOImpl implements SchoolDAO {
 			contact.setMobileNumber(9995995182L);
 			for (int j = 5; j <= 7; ++j) {
 				final School school1 = new School();
-				school1.setContact(contact);
+				// school1.setContact(contact);
 				school1.setSchoolName("Mar basilj" + j);
 				school1.setCity("Kothamangalam");
 				schoolRepository.save(school1);
@@ -122,16 +122,17 @@ public class SchoolDAOImpl implements SchoolDAO {
 //			}
 //
 //		}
-		final List<School> schoolList = schoolRepository.findAll(likeSchoolName(name).and(likeCity("hari")));
+		final List<School> schoolList = schoolRepository.findAll(likeSchoolName(name));
 		return schoolMapper.toVOList(schoolList);
 		// return null;
+		// .and(likeCity("hari"))
 	}
 
 	public static Specification<School> likeSchoolName(final String studentName) {
 		if (studentName == null) {
 			return null;
 		}
-		return (root, query, cb) -> cb.like(root.get(School_.Name), "%" + studentName + "%");
+		return (root, query, cb) -> cb.like(root.get(School_.schoolName), "%" + studentName + "%");
 	}
 
 	public static Specification<School> likeCity(final String city) {

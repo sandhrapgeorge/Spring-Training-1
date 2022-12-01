@@ -38,7 +38,6 @@ public class MyAspect {
 
 	@Pointcut("execution(* com.scg.training.dao.impl.SchoolDAOImpl.*(..))")
 	public void loginMethodPointCut() {
-
 	}
 
 //	@AfterReturning(pointcut = "execution(* com.scg.training.service.impl.StudentServiceImpl.*(..))", returning = "result")

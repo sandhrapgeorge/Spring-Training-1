@@ -25,7 +25,8 @@ public class StudentServiceImpl implements StudentService {
 		}
 //		final String name=studentVO.getSchoolVO().getSchoolName();
 //		if() {
-		return studentDao.saveStudent(studentVO);
+		final StudentVO studentvo = studentDao.saveStudent(studentVO);
+		return studentvo;
 		// }
 	}
 

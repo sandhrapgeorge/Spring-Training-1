@@ -1,7 +1,5 @@
 package com.scg.training.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,23 +43,24 @@ public class Student extends Audit {
 	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
-	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
-	@JsonIgnoreProperties("student")
-	private List<Laptop> laptop;
-//cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
+	// @OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch =
+	// FetchType.LAZY, orphanRemoval = true)
+	// @JoinColumn(name = "studentid")
+	// @JsonIgnoreProperties("student")
+	// private List<Laptop> laptop;
+	// cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "schoolid")
-	@JsonIgnoreProperties("student")
+	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid")
+	// @JsonIgnoreProperties("student")
 	private School school;
 
 	public Student(final String studentName, final Gender gender, final StudentDetails studentDetails,
-			final List<Laptop> laptop, final School school) {
+			final School school) {
 		this.studentName = studentName;
 		this.gender = gender;
 		this.studentDetails = studentDetails;
-		this.laptop = laptop;
+		// this.laptop = laptop;
 		this.school = school;
 	}
 
