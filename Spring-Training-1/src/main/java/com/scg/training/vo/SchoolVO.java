@@ -19,10 +19,10 @@ public class SchoolVO {
 
 	// List<StudentVO> studentVO;
 
-	public SchoolVO(final String schoolName, final String city) {
-		this.schoolName = schoolName;
-		this.city = city;
-		// this.studentVO = studentVO;
-	}
+//	public SchoolVO(final String schoolName, final String city) {
+//		this.schoolName = schoolName;
+//		this.city = city;
+//		// this.studentVO = studentVO;
+//	}
 
 }

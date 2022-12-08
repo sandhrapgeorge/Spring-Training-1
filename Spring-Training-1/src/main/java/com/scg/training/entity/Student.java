@@ -1,5 +1,7 @@
 package com.scg.training.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,11 +46,10 @@ public class Student extends Audit {
 	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
-	// @OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch =
-	// FetchType.LAZY, orphanRemoval = true)
-	// @JoinColumn(name = "studentid")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "studentid")
 	// @JsonIgnoreProperties("student")
-	// private List<Laptop> laptop;
+	private List<Laptop> laptop;
 	// cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
 
 	@ManyToOne(fetch = FetchType.LAZY)

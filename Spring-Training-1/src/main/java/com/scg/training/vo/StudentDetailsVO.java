@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class StudentDetailsVO {
 
-	private Integer id;
+	private Integer studentDetailsId;
 	private String hobby;
 	private Double weight;
 

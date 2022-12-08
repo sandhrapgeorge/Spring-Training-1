@@ -41,6 +41,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-aop
 	implementation 'org.springframework:spring-aop:5.3.23'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation  'com.nimbusds:nimbus-jose-jwt:9.0.1'
 }
 
 dependencyManagement {

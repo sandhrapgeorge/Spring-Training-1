@@ -13,13 +13,13 @@ import lombok.Setter;
 @Getter
 public class LaptopVO {
 
-	private int laptopId;
+	private int laptopid;
 	private String laptopName;
-	// private StudentVO studentVO;
+	private StudentVO studentVO;
 
-	public LaptopVO(final String laptopName) {
-		this.laptopName = laptopName;
-		// this.studentVO = studentVO;
-	}
+//	public LaptopVO(final String laptopName) {
+//		this.laptopName = laptopName;
+//		// this.studentVO = studentVO;
+//	}
 
 }

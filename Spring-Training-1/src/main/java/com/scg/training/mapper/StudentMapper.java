@@ -9,8 +9,7 @@ import org.mapstruct.ReportingPolicy;
 import com.scg.training.entity.Student;
 import com.scg.training.vo.StudentVO;
 
-@Mapper(componentModel = "spring", uses = { StudentDetailsMapper.class,
-		SchoolMapper.class }, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", uses = { SchoolMapper.class }, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface StudentMapper {
 
 	@Mapping(source = "studentid", target = "id")
@@ -20,13 +19,13 @@ public interface StudentMapper {
 //	@Mapping(target = "createdTimestamp", ignore = true)
 //	@Mapping(target = "lastUpdatedBy", ignore = true)
 //	@Mapping(target = "lastUpdatedTimestamp", ignore = true)
-	// @Mapping(source = "laptop", target = "laptopVO")
+	@Mapping(source = "laptop", target = "laptopVO")
 	StudentVO toVO(Student student);
 
 	@Mapping(target = "studentid", source = "id")
 	@Mapping(target = "studentDetails", source = "studentDetailsVO")
 	@Mapping(target = "school", source = "schoolVO")
-	// @Mapping(target = "laptop", source = "laptopVO")
+	@Mapping(target = "laptop", source = "laptopVO")
 	Student toEntity(StudentVO StudentVO);
 
 	List<StudentVO> toVOList(List<Student> studentList);
@@ -34,3 +33,7 @@ public interface StudentMapper {
 	List<Student> toEntityList(List<StudentVO> studentVoList);
 
 }
+//when parent entity have mapper, we don't need to use mapper for child entities.'
+//ie, no need for using studentDetailsMapper and LaptopMapper.
+//if we are not using child entity mappers then we need to use the same name in vo entity of child entity.
+//unmappedTargetPolicy = ReportingPolicy.IGNORE, we the superclass fields are not using vo. then we can ignore the feilds in mapping using unmappedTargetPolicy
