@@ -2,7 +2,6 @@ package com.scg.training.service;
 
 import java.util.List;
 
-import com.scg.training.entity.Student;
 import com.scg.training.exception.InvalidInputException;
 import com.scg.training.vo.StudentVO;
 
@@ -10,11 +9,11 @@ import com.scg.training.vo.StudentVO;
 //@Component
 public interface StudentService {
 
-	Student saveStudent(Student student) throws Exception, InvalidInputException;
+	StudentVO saveStudent(StudentVO studentVO) throws Exception, InvalidInputException;
 
 	List<StudentVO> getStudents();
 
-	List<Student> getStudentByName(String studentName);
+	List<StudentVO> getStudentByName(String studentName);
 
 	String deleteStudent(int id);
 

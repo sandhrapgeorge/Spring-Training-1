@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,41 +30,42 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 //@NamedQueries({ @NamedQuery(name = "Student.findStudentByName", query = "from Student where name = ?1") })
-@NamedNativeQuery(name = "Student.findStudentByName", query = "selec * from student where studentname=?", resultClass = Student.class)
+@NamedNativeQuery(name = "Student.findStudentByName", query = "select * from student where studentname=?", resultClass = Student.class)
 public class Student extends Audit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Integer studentid;
-	@Column(name = "studentname", length = 5, nullable = false, unique = true)
+	@Column(name = "studentname", length = 30, nullable = false, unique = true)
 
 	private String studentName;
 	@Enumerated(EnumType.ORDINAL)
 	private Gender gender;
 
-	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = StudentDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "studentDetailsId")
 	StudentDetails studentDetails;
 
-	@OneToMany(targetEntity = Laptop.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
-	@JsonIgnoreProperties("student")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "studentid")
+	// @JsonIgnoreProperties("student")
 	private List<Laptop> laptop;
-//cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
+	// cascade types: ALL, PERSIST, MERGE, REMOVE,REFRESH,DETACH
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "schoolid")
-	@JsonIgnoreProperties("student")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "schoolid", referencedColumnName = "schoolid")
+	// @JsonIgnoreProperties("student")
 	private School school;
 
 	public Student(final String studentName, final Gender gender, final StudentDetails studentDetails,
-			final List<Laptop> laptop, final School school) {
+			final School school) {
 		this.studentName = studentName;
 		this.gender = gender;
 		this.studentDetails = studentDetails;
-		this.laptop = laptop;
+		// this.laptop = laptop;
 		this.school = school;
 	}
+
 }
 
 //JPA( Java Persistence API) is a specification which specifies how to access, manage and

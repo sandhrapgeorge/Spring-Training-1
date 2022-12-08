@@ -6,16 +6,18 @@ import com.scg.training.vo.SchoolVO;
 
 public interface SchoolService {
 
-	String saveSchool(String city);
+	String saveSchool(String city) throws InterruptedException;
 
 	List<SchoolVO> getSchool();
 
 	SchoolVO getSchoolById(int id);
 
-	SchoolVO findBySchoolName(String name);
+	SchoolVO getBySchoolName(String name);
 
 	String deleteSchool(int id);
 
 	SchoolVO updateShoolById(SchoolVO departmentVo);
+
+	List<SchoolVO> searchBySchoolName(String name);
 
 }

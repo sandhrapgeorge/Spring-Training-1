@@ -12,18 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.scg.training.feignUtil.JavaDesignPatternService;
 import com.scg.training.service.SchoolService;
 import com.scg.training.vo.SchoolVO;
 
 @RestController
 @RequestMapping("schools")
 public class SchoolController {
-
+	@Autowired
+	JavaDesignPatternService javaDesignPatternService;
 	@Autowired
 	private SchoolService schoolService;
 
 	@PostMapping("/{city}")
-	public String saveSchool(@PathVariable final String city) {
+	public String saveSchool(@PathVariable final String city) throws InterruptedException {
 		return schoolService.saveSchool(city);
 
 	}
@@ -41,8 +43,8 @@ public class SchoolController {
 	}
 
 	@GetMapping("/name/{name}")
-	public SchoolVO findByName(@PathVariable final String name) {
-		return schoolService.findBySchoolName(name);
+	public SchoolVO getBySchoolName(@PathVariable final String name) {
+		return schoolService.getBySchoolName(name);
 	}
 
 	@DeleteMapping("/{id}")
@@ -52,8 +54,14 @@ public class SchoolController {
 	}
 
 	@PutMapping
-	public SchoolVO updateSchoolById(@RequestBody final SchoolVO DepartmentVo) {
-		return schoolService.updateShoolById(DepartmentVo);
+	public String updateSchoolById(@RequestBody final SchoolVO DepartmentVo) {
+		return javaDesignPatternService.stateDesign();
+		// return schoolService.updateShoolById(DepartmentVo);
+	}
+
+	@GetMapping("/search/{name}")
+	public List<SchoolVO> searchByName(@PathVariable final String name) {
+		return schoolService.searchBySchoolName(name);
 	}
 
 }

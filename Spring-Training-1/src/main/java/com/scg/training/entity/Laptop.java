@@ -1,7 +1,7 @@
 package com.scg.training.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,18 +21,16 @@ import lombok.Setter;
 @Table(name = "Laptop")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Laptop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer laptopid;
+	private int laptopid;
 	private String laptopName;
 
-	public Laptop(final String laptopName) {
-		this.laptopName = laptopName;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "student_id", referencedColumnName = "studentid")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "studentid")
+	// @JsonIgnore
 	private Student student;
 
 }

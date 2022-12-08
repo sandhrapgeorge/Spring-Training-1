@@ -26,7 +26,7 @@ public class CustomAuditListener {
 		student.setLastUpdatedTimestamp(now);
 		student.setCreatedBy("ani");
 		student.setLastUpdatedBy("vinu");
-		log.info("data inserting on progress");
+		log.info("data inserting on progress...");
 	}
 
 	@PreUpdate
@@ -34,7 +34,7 @@ public class CustomAuditListener {
 		// final Audit audit = stud.getAudit();
 		student.setLastUpdatedTimestamp(LocalDateTime.now());
 		student.setLastUpdatedBy("abc");
-		log.info("data inserting on progress");
+		log.info("data inserting on progress******");
 	}
 
 }

@@ -18,7 +18,12 @@ public class DataSourceAspect {
 		final String message = "Data source tracker : " + joinPoint.getSignature().getName();
 		final Object returnvalue = joinPoint.proceed();
 		log.info(message);
-		log.info("" + returnvalue);
+		// log.info("" + returnvalue);
+//		if (returnvalue instanceof Connection) {
+//			final Connection con = (Connection) Proxy.newProxyInstance(ConnectionImpl.class.getClassLoader(),
+//					new Class[] { Connection.class }, new ConnectionInvocationHandler((Connection) returnvalue));
+//			return con;
+//		}
 		return returnvalue;
 	}
 

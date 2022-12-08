@@ -23,7 +23,7 @@ public class SchoolTestRepository {
 		contact.setMobileNumber(9237890239L);
 		for (int i = 1; i <= 10; ++i) {
 			final School school = new School();
-			school.setContact(contact);
+			// school.setContact(contact);
 			school.setSchoolName("green vally" + i);
 			school.setCity("nellikuzhi");
 			entityManager.merge(school);
